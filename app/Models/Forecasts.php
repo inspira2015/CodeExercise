@@ -19,4 +19,12 @@
                                 'precipitation_probability',
                               ];
     
+        public function scopeGetForecastByLocIdAndTime($query, $locationId, $time)
+        {
+            return $query->select('forecasts.*')
+                         ->join('locations', 'locations.id',  '=', 'forecasts.locations_id')
+                         ->where('locations.id', '=', $locationId)
+                         ->where('forecasts.time', '>', $time)
+                         ->get();
+        }
     }

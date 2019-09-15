@@ -4,8 +4,7 @@
     namespace App\Models;
     use App\Models\Forecasts;
     use App\Models\Locations;
-    
-    
+
     
     class ForecastRepository
     {
@@ -40,7 +39,6 @@
     
         public function findForecastsByLocationIdAfter(int $locationId, int $epoch)
         {
-        
+            return Forecasts::GetForecastByLocIdAndTime($locationId, $epoch);
         }
-        
     }
