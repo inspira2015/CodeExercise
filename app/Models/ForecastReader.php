@@ -1,7 +1,5 @@
 <?php
 
-// Read from API
-
 namespace App\Models;
 
 use App\Traits\TraitSafeMergePaths;

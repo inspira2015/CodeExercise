@@ -44,23 +44,15 @@ class HomeController extends Controller
         $longitude = -122.4234;
     
         $reader = new ForecastReader($apiDetails, $mask);
-    
-    
         $forecastService = new ForecastService($reader);
         
         $locationId = $forecastService->saveForecastForALocation($latitude,$longitude);
         
-       // print_r($locationId);
-        exit;
+        if ($locationId == false) {
+            
+        }
 
-
-        $temp = $reader->readForecastByLocation($latitude, $longitude);
-        
-        echo "<pre>";
-        print_r($temp);
-        
-
-        return view('home');
+     
     }
 
 }

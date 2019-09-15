@@ -1,12 +1,10 @@
 <?php
     
-    
     namespace App\Models;
     
     use App\Models\ForecastRepository;
     use App\Models\ForecastReader;
     use Illuminate\Support\Facades\Date;
-
 
     class ForecastService
     {
@@ -26,11 +24,12 @@
             
             if ($this->checkForecast($location->last_forecast_update, $now)) {
                 $forecastArray = self::$forecastReader->readForecastByLocation($latitude, $longitude);
-                $temp = $this->prepareForecastForInsert([$forecastArray], ['locations_id' => $location->id]);
-                ForecastRepository::saveForecasts($temp);
+                ForecastRepository::saveForecasts($this->prepareForecastForInsert([$forecastArray], ['locations_id' => $location->id]));
                 $location->last_forecast_update = $now;
                 $location->save();
+                return $location->id;
             }
+            return false;
         }
         
         protected function prepareForecastForInsert(Array $forecastArray, Array $locationId)

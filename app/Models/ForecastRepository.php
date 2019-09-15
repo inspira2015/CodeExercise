@@ -1,10 +1,9 @@
 <?php
     
-    
     namespace App\Models;
+    
     use App\Models\Forecasts;
     use App\Models\Locations;
-
     
     class ForecastRepository
     {
