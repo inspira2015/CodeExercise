@@ -19,7 +19,7 @@
             $this->hoursToCheck = 4;
         }
     
-        public function saveForecastForALocation($latitude, $longitude)
+        public function saveForecastForALocation(int $latitude, int $longitude)
         {
             $location = ForecastRepository::findOrCreateLocation($latitude, $longitude);
             $now = date('Y-m-d G:i:s');
@@ -51,13 +51,11 @@
         protected function checkForecast($lastTime, $newTime)
         {
             $unixLastTime = new \DateTime($lastTime);
- 
             $unixNewTime  = new \DateTime($newTime);
             $unixNewTime->setTimezone(new \DateTimeZone("UTC"));
             
             $unixLastTime->add($this->getValidInterval());
             $unixLastTime->setTimezone(new \DateTimeZone("UTC"));
-
             $unixLast = (int) $unixLastTime->getTimestamp();
             $unixNow = (int) $unixNewTime->getTimestamp();
             

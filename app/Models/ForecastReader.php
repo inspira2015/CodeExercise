@@ -21,7 +21,7 @@ class ForecastReader
         $this->mask   = $mask;
     }
 
-    public function readForecastByLocation($latitude, $longitude)
+    public function readForecastByLocation(int $latitude, int $longitude)
     {
         $curl = curl_init();
         curl_setopt_array($curl, [
@@ -44,7 +44,7 @@ class ForecastReader
         return json_decode($response);
     }
     
-    protected function getForecastResponseWithMask($restResponse)
+    protected function getForecastResponseWithMask(Array $restResponse)
     {
         $resultArray = [];
         foreach ($this->mask as $key => $value) {

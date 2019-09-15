@@ -13,11 +13,11 @@
         public static function saveForecasts(Array $forecasts)
         {
             foreach ($forecasts as $key => $value) {
-                $forecasts = Forecasts::create($value);
+                Forecasts::create($value);
             }
         }
         
-        public static function createLocation($latitude, $longitude)
+        public static function createLocation(int $latitude, int $longitude)
         {
             $newLocation = new Locations();
             $newLocation->latitude = $latitude;
@@ -26,7 +26,7 @@
             return $newLocation;
         }
         
-        public static function findOrCreateLocation($latitude, $longitude)
+        public static function findOrCreateLocation(int $latitude, int $longitude)
         {
             $location = Locations::where('latitude', '=', $latitude)
                                    ->where('longitude', '=', $longitude)
@@ -36,6 +36,11 @@
                 return $location;
             }
             return self::createLocation($latitude,$longitude);
+        }
+    
+        public function findForecastsByLocationIdAfter(int $locationId, int $epoch)
+        {
+        
         }
         
     }
