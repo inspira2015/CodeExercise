@@ -10,10 +10,10 @@
     class ForecastRepository
     {
     
-        public function saveForecasts(Array $forecasts)
+        public static function saveForecasts(Array $forecasts)
         {
             foreach ($forecasts as $key => $value) {
-            
+                $forecasts = Forecasts::create($value);
             }
         }
         
@@ -23,7 +23,19 @@
             $newLocation->latitude = $latitude;
             $newLocation->longitude = $longitude;
             $newLocation->save();
-            return $newLocation->id;
+            return $newLocation;
+        }
+        
+        public static function findOrCreateLocation($latitude, $longitude)
+        {
+            $location = Locations::where('latitude', '=', $latitude)
+                                   ->where('longitude', '=', $longitude)
+                                   ->first();
+            
+            if ($location !== null) {
+                return $location;
+            }
+            return self::createLocation($latitude,$longitude);
         }
         
     }
