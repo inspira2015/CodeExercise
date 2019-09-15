@@ -20,7 +20,6 @@ class CreateForecastsTable extends Migration
             $table->decimal('temperature', 8,2);
             $table->decimal('precipitation_intensity', 10,4);
             $table->tinyInteger('precipitation_probability');
-            $table->timestamps();
         });
     }
 
